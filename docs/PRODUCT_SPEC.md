@@ -931,7 +931,7 @@ Response: Redirect to /dashboard (with session cookie)
 ### 9.2 Story 분해
 
 #### EPIC-1: 프로젝트 세팅
-- [ ] Story: 백엔드 프로젝트 초기화 (FastAPI + Poetry)
+- [ ] Story: 백엔드 프로젝트 초기화 (Django + uv)
 - [ ] Story: 프론트엔드 프로젝트 초기화 (React + Vite + TypeScript)
 - [ ] Story: 데이터베이스 스키마 설계 및 마이그레이션
 - [ ] Story: 개발 환경 설정 (환경변수, CORS 등)
