@@ -324,3 +324,5 @@ CLAUDE.md
 .claude/
 .mcp.*
 temp/
+# Next.js lib directory (override Python rule)
+!lib/
