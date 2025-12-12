@@ -153,6 +153,22 @@ export default function MailPage() {
     }
   };
 
+  const classifyUnclassifiedMails = async () => {
+    try {
+      toast('미분류 메일을 AI로 분류 중...', 'info');
+      const { data } = await api.post<ApiResponse<{ classification_id: string }>>('/classifier/classify-unclassified/');
+      if (data.status === 'success') {
+        toast('AI 분류가 완료되었습니다.', 'success');
+        fetchMails();
+        fetchFolders();
+        fetchVirtualFolderCounts();
+      }
+    } catch (error) {
+      console.error('Failed to classify mails:', error);
+      toast('AI 분류에 실패했습니다.', 'error');
+    }
+  };
+
   const fetchSyncStatus = async () => {
     try {
       const { data } = await api.get<ApiResponse<SyncStatus>>('/sync/status/');
@@ -165,6 +181,8 @@ export default function MailPage() {
           fetchMails();
           fetchFolders();
           fetchVirtualFolderCounts();
+          // 동기화 완료 후 자동으로 미분류 메일 분류
+          classifyUnclassifiedMails();
         } else if (prevState === 'in_progress' && data.data.state === 'failed') {
           toast('동기화에 실패했습니다.', 'error');
         }
